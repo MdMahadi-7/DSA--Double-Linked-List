@@ -28,6 +28,10 @@ int main(){
   fr->next=nullptr;
   fr->prev=nullptr;
 
+  node* newbie=new node();
+  newbie->data=10;
+  newbie->next=nullptr;
+  newbie->prev=nullptr;
 
   head=frs;
   frs->next=sec;
@@ -44,14 +48,15 @@ int main(){
      if(ptr->next==head) break;
   }
   cout<<endl<<endl;
-
-  for(node*ptr=head;;ptr=ptr->next){
-    if(ptr->next==head){
-      head=head->next;
-      ptr->next=head;
-      head->prev=ptr;
+  for(node* ptr=head,*prev=nullptr;;prev=ptr,ptr=ptr->next){
+     if(ptr->next==head){
+      newbie->next=head;
+      head->prev=newbie;
+      newbie->prev=ptr;
+      ptr->next=newbie;
+      head=newbie;
       break;
-    }
+     }
   }
 
   for(node* ptr=head;;ptr=ptr->next){
