@@ -1,0 +1,68 @@
+#include<iostream>
+using namespace std;
+class doubly{
+  public:
+  int data;
+  doubly* next=nullptr;
+  doubly* prev=nullptr;
+};
+doubly* head=nullptr;
+int main(){
+  doubly* first=new doubly();
+  first->data=1;
+  first->next=nullptr;
+  first->prev=nullptr;
+
+  doubly* sec=new doubly();
+  sec->data=2;
+  sec->next=nullptr;
+  sec->prev=nullptr;
+
+  doubly* thi=new doubly();
+  thi->data=3;
+  thi->next=nullptr;
+  thi->prev=nullptr;
+
+  doubly* fr=new doubly();
+  fr->data=4;
+  fr->next=nullptr;
+  fr->prev=nullptr;
+
+  doubly* fi=new doubly();
+  fi->data=5;
+  fi->next=nullptr;
+  fi->prev=nullptr;
+
+  head=first;
+  first->prev=nullptr;
+  first->next=sec;
+  sec->prev=first;
+  sec->next=thi;
+  thi->prev=sec;
+  thi->next=fr;
+  fr->prev=thi;
+  fr->next=fi;
+  fi->prev=fr;
+
+  
+  for(doubly* ptr=head;ptr!=nullptr;ptr=ptr->next){
+    cout<<ptr->data<<" ";
+  }
+  cout<<endl<<endl;
+
+  // delete before 3
+  for(doubly* ptr=head,*prev1=nullptr,*prev2=nullptr;ptr!=nullptr;prev2=prev1,prev1=ptr,ptr=ptr->next){
+    if(ptr->data==3){
+      prev2->next=ptr;
+      ptr->prev=prev2;
+    }
+  }
+  for(doubly* ptr=head;ptr!=nullptr;ptr=ptr->next){
+    cout<<ptr->data<<" ";
+  }
+  cout<<endl;
+
+  for(doubly* ptr=head;ptr!=nullptr;ptr=ptr->next){
+    cout<<ptr->data<<" ";
+  }
+}
