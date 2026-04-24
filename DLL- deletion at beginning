@@ -1,0 +1,47 @@
+#include<iostream>
+using namespace std;
+class doubly{
+  public:
+  int data;
+  doubly* next=nullptr;
+  doubly* prev=nullptr;
+};
+doubly* head=nullptr;
+int main(){
+  doubly* first=new doubly();
+  first->data=1;
+  first->next=nullptr;
+  first->prev=nullptr;
+
+  doubly* sec=new doubly();
+  sec->data=2;
+  sec->next=nullptr;
+  sec->prev=nullptr;
+
+  doubly* thi=new doubly();
+  thi->data=3;
+  thi->next=nullptr;
+  thi->prev=nullptr;
+
+  head=first;
+  first->prev=nullptr;
+  first->next=sec;
+  sec->prev=first;
+  sec->next=thi;
+  thi->prev=sec;
+  thi->next=nullptr;
+
+  for(doubly* ptr=head;ptr!=nullptr;ptr=ptr->next){
+    cout<<ptr->data<<" ";
+  }
+  cout<<endl<<endl;
+
+  //deletion at beginning
+  head=head->next;
+  head->prev=nullptr;
+
+ 
+  for(doubly* ptr=head;ptr!=nullptr;ptr=ptr->next){
+    cout<<ptr->data<<" ";
+  }
+}
