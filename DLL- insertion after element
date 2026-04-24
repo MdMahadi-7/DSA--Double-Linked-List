@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+class doubly{
+  public:
+  int data;
+  doubly* next=nullptr;
+  doubly* prev=nullptr;
+};
+doubly* head=nullptr;
+int main(){
+  doubly* first=new doubly();
+  first->data=1;
+  first->next=nullptr;
+  first->prev=nullptr;
+
+  doubly* sec=new doubly();
+  sec->data=2;
+  sec->next=nullptr;
+  sec->prev=nullptr;
+
+  doubly* thi=new doubly();
+  thi->data=3;
+  thi->next=nullptr;
+  thi->prev=nullptr;
+
+  head=first;
+  first->prev=nullptr;
+  first->next=sec;
+  sec->prev=first;
+  sec->next=thi;
+  thi->prev=sec;
+  thi->next=nullptr;
+
+  doubly* newbie=new doubly();
+  newbie->data=10;
+  newbie->next=nullptr;
+  newbie->prev=nullptr;
+  doubly* newbie2=new doubly();
+  newbie2->data=2;
+  newbie2->next=nullptr;
+  newbie2->prev=nullptr;
+
+  for(doubly* ptr=head;ptr!=nullptr;ptr=ptr->next){
+    cout<<ptr->data<<" ";
+  }
+  cout<<endl<<endl;
+
+  // insert after 2
+  for(doubly* ptr=head;ptr!=nullptr;ptr=ptr->next){
+    if(ptr->data==2){
+      newbie->next=ptr->next;
+      ptr->next=newbie;
+      newbie->prev=ptr;
+      ptr->next->next->prev=newbie;
+      break;
+    }
+  }  
+  for(doubly* ptr=head;ptr!=nullptr;ptr=ptr->next){
+    cout<<ptr->data<<" ";
+  }
+}
