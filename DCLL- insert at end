@@ -1,0 +1,66 @@
+#include<iostream>
+using namespace std;
+class node{
+  public:
+  int data;
+  node* next=nullptr;
+  node* prev=nullptr;
+};
+node* head=nullptr;
+int main(){
+  node* frs=new node();
+  frs->data=1;
+  frs->next=nullptr;
+  frs->prev=nullptr;
+
+  node* sec=new node();
+  sec->data=2;
+  sec->next=nullptr;
+  sec->prev=nullptr;
+
+  node* th=new node();
+  th->data=3;
+  th->next=nullptr;
+  th->prev=nullptr;
+
+  node* fr=new node();
+  fr->data=4;
+  fr->next=nullptr;
+  fr->prev=nullptr;
+
+  node* newbie=new node();
+  newbie->data=10;
+  newbie->next=nullptr;
+  newbie->prev=nullptr;
+
+  head=frs;
+  frs->next=sec;
+  frs->prev=fr;
+  sec->next=th;
+  sec->prev=frs;
+  th->next=fr;
+  th->prev=sec;
+  fr->next=frs;
+  fr->prev=th;
+
+  for(node* ptr=head;;ptr=ptr->next){
+     cout<<ptr->data<<" ";
+     if(ptr->next==head) break;
+  }
+  cout<<endl<<endl;
+
+  for(node* ptr=head;;ptr=ptr->next){
+     if(ptr->next==head){
+      ptr->next=newbie;
+      newbie->next=head;
+      newbie->prev=ptr;
+      head->prev=newbie;
+      break;
+     }
+  }
+
+  for(node* ptr=head;;ptr=ptr->next){
+     cout<<ptr->data<<" ";
+     if(ptr->next==head) break;
+  }
+}
