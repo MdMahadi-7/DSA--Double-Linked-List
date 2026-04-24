@@ -1,0 +1,90 @@
+#include<iostream>
+using namespace std;
+class node{
+  public:
+  int data;
+  node* next=nullptr;
+  node* prev=nullptr;
+};
+node* head=nullptr;
+int main(){
+  node* frs=new node();
+  frs->data=1;
+  frs->next=nullptr;
+  frs->prev=nullptr;
+
+  node* sec=new node();
+  sec->data=2;
+  sec->next=nullptr;
+  sec->prev=nullptr;
+
+  node* th=new node();
+  th->data=3;
+  th->next=nullptr;
+  th->prev=nullptr;
+
+  node* fr=new node();
+  fr->data=4;
+  fr->next=nullptr;
+  fr->prev=nullptr;
+
+  node* newbie=new node();
+  newbie->data=10;
+  newbie->next=nullptr;
+  newbie->prev=nullptr;
+
+  head=frs;
+  frs->next=sec;
+  frs->prev=fr;
+  sec->next=th;
+  sec->prev=frs;
+  th->next=fr;
+  th->prev=sec;
+  fr->next=frs;
+  fr->prev=th;
+
+  for(node* ptr=head;;ptr=ptr->next){
+     cout<<ptr->data<<" ";
+     if(ptr->next==head) break;
+  }
+  cout<<endl<<endl;
+   
+  // oour list-> 1 2 3 4 
+  //insert 10 before 3
+  for(node* ptr=head,*prev=nullptr;;prev=ptr,ptr=ptr->next){
+     if(ptr->data==3){
+      prev->next=newbie;
+      newbie->next=ptr;
+      newbie->prev=prev;
+      ptr->prev=newbie;
+      break;
+     }
+  }
+
+  for(node* ptr=head;;ptr=ptr->next){
+     cout<<ptr->data<<" ";
+     if(ptr->next==head) break;
+  }
+  
+  cout<<endl<<endl;
+  node* newbie2=new node();
+  newbie2->data=8;
+  newbie2->next=nullptr;
+  newbie2->prev=nullptr;
+
+  // insert 8 after 3
+  for(node* ptr=head;;ptr=ptr->next){
+     if(ptr->data==3){
+      node* temp=ptr->next;
+      ptr->next=newbie2;
+      newbie2->prev=ptr;
+      newbie2->next=temp;
+      temp->prev=newbie2;
+      break;
+     }
+  }
+  for(node* ptr=head;;ptr=ptr->next){
+     cout<<ptr->data<<" ";
+     if(ptr->next==head) break;
+  }
+}
