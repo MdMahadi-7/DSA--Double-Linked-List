@@ -1,0 +1,75 @@
+#include<iostream>
+using namespace std;
+class node{
+  public:
+  int data;
+  node* next=nullptr;
+  node* prev=nullptr;
+};
+node* head=nullptr;
+int main(){
+  node* frs=new node();
+  frs->data=1;
+  frs->next=nullptr;
+  frs->prev=nullptr;
+
+  node* sec=new node();
+  sec->data=2;
+  sec->next=nullptr;
+  sec->prev=nullptr;
+
+  node* th=new node();
+  th->data=3;
+  th->next=nullptr;
+  th->prev=nullptr;
+
+  node* fr=new node();
+  fr->data=4;
+  fr->next=nullptr;
+  fr->prev=nullptr;
+
+
+  head=frs;
+  frs->next=sec;
+  frs->prev=fr;
+  sec->next=th;
+  sec->prev=frs;
+  th->next=fr;
+  th->prev=sec;
+  fr->next=frs;
+  fr->prev=th;
+
+  for(node* ptr=head;;ptr=ptr->next){
+     cout<<ptr->data<<" ";
+     if(ptr->next==head) break;
+  }
+  cout<<endl<<endl;
+
+  // delete after 3
+  for(node*ptr=head;;ptr=ptr->next){
+    if(ptr->data==3){
+      ptr->next=ptr->next->next;
+      ptr->next->prev=ptr;
+      break;
+    }
+  }
+  for(node* ptr=head;;ptr=ptr->next){
+     cout<<ptr->data<<" ";
+     if(ptr->next==head) break;
+  }
+  cout<<endl<<endl;
+
+  // delete before 3
+  for(node*ptr=head,*prev1=nullptr,*prev2=nullptr;;prev2=prev1,prev1=ptr,ptr=ptr->next){
+    if(ptr->data==3){
+      prev2->next=ptr;
+      ptr->prev=prev2;
+      break;
+    }
+  }
+
+  for(node* ptr=head;;ptr=ptr->next){
+     cout<<ptr->data<<" ";
+     if(ptr->next==head) break;
+  }
+}
